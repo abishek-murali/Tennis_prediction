@@ -9,12 +9,12 @@ library(knitr)
 library(magrittr)
 ```
 
-The game of tennis is something that has always fascinated me. It is a combination of talent and mental persistance. Luck plays a very small role in deciding the outcome of a tennis game. This got me wondering about how hard it would be to predict results on tennis games based on game statistics and look at the most important factors that influence the outcome of a game. I will be treating this as a classification problem where I classify the result of a game as a win or loss for Player 1 based on the match statistics.
+The game of tennis is something that has always fascinated me. It is a combination of talent and mental persistence. Luck plays a very small role in deciding the outcome of a tennis game. This got me wondering about how hard it would be to predict results on tennis games based on game statistics and look at the most important factors that influence the outcome of a game. I will be treating this as a classification problem where I classify the result of a game as a win or loss for Player 1 based on the match statistics.
 
 Initial analysis of the data
 ----------------------------
 
-I have combined the data for men's and women's tennis. Outcome of women's tennis is decided by the player who win's 2 sets, whereas this is 3 sets for men's tennis. This resulted in a lot of empty values for `Set3`, `Set 4` and `Set 5`. For the purpose of this analysis I've replace the empty values with 0. This will not affect the results of my model in any manner. Below is a snippet of the imported data for analysis.
+I have combined the data for men's and women's tennis. The outcome of women's tennis is decided by the player who wins 's 2 sets, whereas this is 3 sets for men's tennis. This resulted in a lot of empty values for `Set3`, `Set 4` and `Set 5`. For the purpose of this analysis, I've replaced the empty values with 0. This will not affect the results of my model in any manner. Below is a snippet of the imported data for analysis.
 
 ![](./Images/Inputdata.png)
 
@@ -62,7 +62,7 @@ Below is a summary of the missing values in the dataset -
     # ST4            0
     # ST5            0
 
-I have removed the Total points won(TPW) as this highly correlated to the result of the game itself. I want to be looking at stats related to the players game for this analysis and not the statistics og the game itself. For the remaining missing values I have imputed them with the median. This was done after looking at the distribution of the data and my knowledge of the game. One can expect the values of these statistics to vary about the mean and by introducing the median I am not introducing a huge `bias` in my model instead of making them `0`.
+I have removed the Total points won(TPW) as this highly correlated to the result of the game itself. I want to be looking at stats related to the players game for this analysis and not the statistics on the game itself. For the remaining missing values, I have imputed them with the median. This was done after looking at the distribution of the data and my knowledge of the game. One can expect the values of these statistics to vary about the mean and by introducing the median I am not introducing a huge `bias` in my model instead of making them `0`.
 
 EDA
 ---
@@ -71,13 +71,13 @@ Exploring the correlation between the numeric variables at play here -
 
 ![](./Images/Heatplot.png)
 
-We notice that very few points have a high correlation which can prove to be beneficial while building the models and looking at importance of features.
+We notice that very few points have a high correlation which can prove to be beneficial while building the models and looking at the importance of features.
 
 Aces could play a vital role in deciding the outcome of a game. Below is the distribution of Aces by Players 1 and 2 -
 
 ![](./Images/Aces_dist.png)
 
-Aces are also influenced by the court. We would expect more Aces in Wimbeldon as the ball is faster of a grass surface compared to the French open which has a playing surface of clay. This makes the ball hold-up when it hits the surface, making it harder to serve an Ace. Below is a distribution of Aces by grand slams
+Aces are also influenced by the court. We would expect more Aces in Wimbledon as the ball is faster on a grass surface compared to the French open which has a slower playing surface. This makes the ball hold-up when it hits the surface, making it harder to serve an Ace. Below is a distribution of Aces by grand slams
 
 ![](./Images/Aces.png)
 
@@ -92,7 +92,7 @@ Winners and unforced errors play a huge role in deciding the outcome of games. B
 Model
 -----
 
-For the purpose of this classification problem I will be building a knn, random forest and Logistic regression model. Below is a distribution of the distribution of numeric values.
+For the purpose of this classification problem, I will be building a kind, random forest and Logistic regression model. Below is a distribution of the distribution of numeric values.
 
 ``` r
 kable(read.csv('./Numeric_desription.csv')) #%>%  kable("html") %>%
@@ -113,11 +113,11 @@ kable(read.csv('./Numeric_desription.csv')) #%>%  kable("html") %>%
 #   kable_styling()
 ```
 
-We notice the difference in mean across the features. I have scaled the features to ensure a feature does not influence results just because it has different units of meaurement.
+We notice the difference in mean across the features. I have scaled the features to ensure a feature does not influence results just because it has different units of measurement.
 
 The next step involved creating dummy variables to ensure factors are treated as categories and are transformed to columns with 1's and 0's. This is done to ensure the magnitude of the numeric values of a categorical column such as Grand slam code does not have any influence on the results.
 
-I proceed to splitting the data into train-validation and test for this analysis. I will be using validation to tune the hyperparameters of the model and finally test to check how well it performs.
+I proceed to split the data into train-validation and test for this analysis. I will be using validation to tune the hyperparameters of the model and finally test to check how well it performs.
 
 #### Results of model analysis
 
@@ -171,7 +171,7 @@ Below is a summary of the analysis of the model
 
 > The graphs above justify the choice of hyperparameters I have used for this experiment.
 
-> I was able to obtain the best accuracy from a Logistic regression model with `L1` penalty being applied. This model is robust to outliers that might occur in few of the games and in this case I did not want them to influnce the prediction result. For example, I remember the John Isner and Mahut game in 2010 that went of forever. The number of Aces, Errors and Winners in that game was completely off the charts. This was a one-off scenario and I thought it wouldn't make sense to let such scenarios influence the prediction results.
+> I was able to obtain the best accuracy from a Logistic regression model with `L1` penalty being applied. This model is robust to outliers that might occur in few of the games and in this case I did not want them to influence the prediction result. For example, I remember the John Isner and Mahut game in 2010 that went on forever. The number of Aces, Errors and Winners in that game was completely off the charts. This was a one-off scenario and I thought it wouldn't make sense to let such scenarios influence the prediction results.
 
 #### Feature importance
 
@@ -210,7 +210,7 @@ Feature importance obtained from the logistic model -
      ('BPW.2', -1.4186786595523337),
      ('FSW.2', -3.124781826755869)
 
-Like we expected the First serve's won has the biggest influence on the results. The chances of a player losing is higher if his/her opponent wins more points on the first serve. We also notice that creating and converting Break points in a game plays a vital role in deciding which way the results are going to swing.
+The First serve's won has the biggest influence on the results. The chances of a player losing are higher if his/her opponent wins more points on the first serve. We also notice that creating and converting Breakpoints in a game plays a vital role in deciding which way the results are going to swing.
 
 References
 ----------

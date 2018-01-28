@@ -1,5 +1,4 @@
-# Tennis_prediction
-Predict results of tennis games
+# Tennis prediction
 
 I have always been fascinated by sports and stats. The hardest bit of prediciting results for games is discounting for luck. Luck probably has the least impact on the game of tennis as it is played between 2 individuals and one can rely on talent to win the game unlike other sports such as soccer where you are only as good as your time. Given the fact that we know luck plays minimal role in tennis can we predict the outcome of games based on player stats?
 
@@ -54,6 +53,17 @@ ST5.2 Set 5 Result for Player 2 (Numeric-Integer)
 FNL.2 Final Number of Games Won by Player 2 (Numeric-Integer)
 Round Round of the tournament at which game is played (Numeric-Integer)
 ```
+
+## Methodology
+
+I will be treating this as a classification problem where the results are predicted based on the in-game statistics. I have noticed a lot of sports recently have the odds of a team winning displayed during the game. This is something I haven't noticed in tennis yet.
+
+I have used 3 models for the purpose of my analysis -
+1. k-nearest neighbours
+2. Regression tree classifier and
+3. Logistic regression
+
+I also look at the importance of features at the end of the analysis to see which factors influence the outcome of the game.
 
 ## How to run the analysis
 
